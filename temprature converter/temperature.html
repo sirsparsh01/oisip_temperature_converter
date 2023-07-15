@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TEMPERATURE CONVERTER</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      overflow: hidden;
+    }
+    
+    .container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: none;
+}
+
+    
+    
+    h2 {
+      margin-top: 0;
+    }
+    
+    label {
+      display: inline-block;
+      margin-bottom: 5px;
+      text-align: left;
+    }
+    
+    input[type="number"] {
+      width: 100%;
+      padding: 5px;
+      font-size: 16px;
+    }
+    
+    select {
+      width: 100%;
+      padding: 5px;
+      font-size: 16px;
+    }
+    
+    button {
+  width: 100%;
+  padding: 8px 15px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 2px;
+}
+
+    
+    button:hover {
+      background-color: #45a049;
+    }
+    
+    #result {
+  margin-top: 22px;
+  font-weight: bold;
+}
+
+    
+    body {
+      background: linear-gradient(to right, #00f260, #0575e6, #f09819, #ff5858, #c34e95);
+      background-size: 1000% 1000%;
+      animation: gradientBackground 30s ease infinite;
+    }
+    
+    @keyframes gradientBackground {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>TEMPERATURE CONVERTER</h2>
+  
+    <div>
+      <label for="temperature">Temperature:</label>
+      <input type="number" id="temperature" placeholder="Enter temperature" required>
+    </div>
+    
+    <div>
+      <label for="unit">Unit:</label>
+      <select id="unit">
+        <option value="celsius">Celsius</option>
+        <option value="fahrenheit">Fahrenheit</option>
+        <option value="kelvin">Kelvin</option>
+      </select>
+    </div>
+    
+    <div>
+      <button onclick="convertTemperature()">Convert</button>
+    </div>
+  
+    <div id="result">
+      <p id="convertedTemp1"></p>
+      <p id="convertedTemp2"></p>
+    </div>
+  </div>
+
+  <script>
+    function convertTemperature() {
+      var temperatureInput = document.getElementById("temperature").value;
+      var unitInput = document.getElementById("unit").value;
+      
+      if (!temperatureInput || isNaN(temperatureInput)) {
+        alert("Please enter a valid temperature.");
+        return;
+      }
+      
+      var temperature = parseFloat(temperatureInput);
+      
+      var result1, result2, unit1, unit2;
+      
+      if (unitInput === "celsius") {
+        result1 = (temperature * 9/5) + 32;
+        result2 = temperature + 273.15;
+        unit1 = "Fahrenheit";
+        unit2 = "Kelvin";
+      } else if (unitInput === "fahrenheit") {
+        result1 = (temperature - 32) * 5/9;
+        result2 = ((temperature - 32) * 5/9) + 273.15;
+        unit1 = "Celsius";
+        unit2 = "Kelvin";
+      } else if (unitInput === "kelvin") {
+        result1 = temperature - 273.15;
+        result2 = ((temperature - 273.15) * 9/5) + 32;
+        unit1 = "Celsius";
+        unit2 = "Fahrenheit";
+      }
+      
+      document.getElementById("convertedTemp1").textContent = "Converted temperature: " + result1.toFixed(2) + " " + unit1;
+      document.getElementById("convertedTemp2").textContent = "Converted temperature: " + result2.toFixed(2) + " " + unit2;
+    }
+  </script>
+</body>
+</html>
